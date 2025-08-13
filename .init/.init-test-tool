@@ -1,0 +1,4 @@
+{
+    "command": "pytest",
+    "working_directory": "/home/kavia/workspace/code-generation/expense-splitter-with-receipts-158093-158103/backend"
+}
