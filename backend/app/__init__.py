@@ -45,8 +45,19 @@ db.init_app(app)
 
 # Import routes after api is created to ensure registration works
 from .routes.health import blp as health_blp  # noqa: E402
+from .routes.groups import blp as groups_blp  # noqa: E402
+from .routes.members import blp as members_blp  # noqa: E402
+from .routes.expenses import blp as expenses_blp  # noqa: E402
+from .routes.receipts import blp as receipts_blp  # noqa: E402
+from .routes.balances import blp as balances_blp  # noqa: E402
 
+# Register blueprints
 api.register_blueprint(health_blp)
+api.register_blueprint(groups_blp)
+api.register_blueprint(members_blp)
+api.register_blueprint(expenses_blp)
+api.register_blueprint(receipts_blp)
+api.register_blueprint(balances_blp)
 
 # Import models and create tables on startup
 with app.app_context():
