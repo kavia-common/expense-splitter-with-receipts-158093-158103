@@ -22,6 +22,22 @@ app.config["OPENAPI_URL_PREFIX"] = "/docs"
 app.config["OPENAPI_SWAGGER_UI_PATH"] = ""
 app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
+# Additional API metadata for OpenAPI/Swagger
+app.config["API_DESCRIPTION"] = (
+    "REST API for splitting expenses with friends and attaching receipts. "
+    "Provides endpoints for groups, members, expenses, receipts, and balance calculations."
+)
+
+# Explicit tag definitions for documentation ordering and descriptions
+app.config["OPENAPI_TAGS"] = [
+    {"name": "Health", "description": "Health check endpoints for service status."},
+    {"name": "Groups", "description": "Manage groups and their attributes."},
+    {"name": "Members", "description": "Manage group memberships."},
+    {"name": "Expenses", "description": "Create, update, and manage expenses and shares."},
+    {"name": "Receipts", "description": "Upload, download, and delete receipts for expenses."},
+    {"name": "Balances", "description": "Compute outstanding balances within a group."},
+]
+
 # Base directory for this backend project
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 

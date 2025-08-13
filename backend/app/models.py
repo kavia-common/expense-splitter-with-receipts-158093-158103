@@ -9,6 +9,8 @@ from . import db
 class User(db.Model):
     """Represents a user/friend in the expense splitting system."""
     __tablename__ = "users"
+    # Allow legacy annotations without SQLAlchemy 2.0 Mapped[] wrappers
+    __allow_unmapped__ = True
 
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(120), nullable=False)
@@ -34,6 +36,7 @@ class User(db.Model):
 class Group(db.Model):
     """Represents a group to which users can belong and record expenses."""
     __tablename__ = "groups"
+    __allow_unmapped__ = True
 
     id: int = db.Column(db.Integer, primary_key=True)
     name: str = db.Column(db.String(150), nullable=False)
@@ -65,6 +68,7 @@ class Group(db.Model):
 class GroupMember(db.Model):
     """Association table for group memberships between users and groups."""
     __tablename__ = "group_members"
+    __allow_unmapped__ = True
     __table_args__ = (
         db.UniqueConstraint("group_id", "user_id", name="uq_group_member_group_user"),
     )
@@ -90,6 +94,7 @@ class GroupMember(db.Model):
 class Expense(db.Model):
     """Represents an expense within a group, optionally associated with a receipt image."""
     __tablename__ = "expenses"
+    __allow_unmapped__ = True
 
     id: int = db.Column(db.Integer, primary_key=True)
     group_id: int = db.Column(
@@ -130,6 +135,7 @@ class Expense(db.Model):
 class ExpenseShare(db.Model):
     """Represents a share of an expense assigned to a particular user."""
     __tablename__ = "expense_shares"
+    __allow_unmapped__ = True
     __table_args__ = (
         db.UniqueConstraint("expense_id", "user_id", name="uq_expense_share_expense_user"),
     )

@@ -30,7 +30,7 @@ class GroupMembersCollection(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(200, GroupMemberSchema(many=True))
-    @blp.doc(summary="List group members", description="List all members of the specified group.")
+    @blp.doc(summary="List group members", description="List all members of the specified group.", tags=["Members"])
     def get(self, group_id: int):
         """Return all members for the group."""
         group = Group.query.get(group_id)
@@ -42,7 +42,7 @@ class GroupMembersCollection(MethodView):
     # PUBLIC_INTERFACE
     @blp.arguments(MemberCreateSchema)
     @blp.response(201, GroupMemberSchema)
-    @blp.doc(summary="Add member", description="Add an existing user to the group.")
+    @blp.doc(summary="Add member", description="Add an existing user to the group.", tags=["Members"])
     def post(self, data, group_id: int):
         """Add a user to the group."""
         group = Group.query.get(group_id)
@@ -69,7 +69,7 @@ class GroupMemberItem(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(200, GroupMemberSchema)
-    @blp.doc(summary="Get member", description="Retrieve a specific group membership by id.")
+    @blp.doc(summary="Get member", description="Retrieve a specific group membership by id.", tags=["Members"])
     def get(self, group_id: int, member_id: int):
         """Get a group member by id."""
         gm = GroupMember.query.filter_by(id=member_id, group_id=group_id).first()
@@ -80,7 +80,7 @@ class GroupMemberItem(MethodView):
     # PUBLIC_INTERFACE
     @blp.arguments(MemberUpdateSchema)
     @blp.response(200, GroupMemberSchema)
-    @blp.doc(summary="Update member", description="Update a group member's role.")
+    @blp.doc(summary="Update member", description="Update a group member's role.", tags=["Members"])
     def patch(self, data, group_id: int, member_id: int):
         """Update a group member (role)."""
         gm = GroupMember.query.filter_by(id=member_id, group_id=group_id).first()
@@ -92,7 +92,7 @@ class GroupMemberItem(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(204)
-    @blp.doc(summary="Remove member", description="Remove a member from the group.")
+    @blp.doc(summary="Remove member", description="Remove a member from the group.", tags=["Members"])
     def delete(self, group_id: int, member_id: int):
         """Remove a user from the group."""
         gm = GroupMember.query.filter_by(id=member_id, group_id=group_id).first()

@@ -33,7 +33,7 @@ class GroupsCollection(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(200, GroupSchema(many=True))
-    @blp.doc(summary="List groups", description="Return all groups.")
+    @blp.doc(summary="List groups", description="Return all groups.", tags=["Groups"])
     def get(self):
         """Get all groups."""
         groups = Group.query.order_by(Group.created_at.desc()).all()
@@ -42,7 +42,7 @@ class GroupsCollection(MethodView):
     # PUBLIC_INTERFACE
     @blp.arguments(GroupCreateSchema)
     @blp.response(201, GroupSchema)
-    @blp.doc(summary="Create group", description="Create a new group.")
+    @blp.doc(summary="Create group", description="Create a new group.", tags=["Groups"])
     def post(self, data):
         """Create a new group."""
         name = data["name"].strip()
@@ -66,7 +66,7 @@ class GroupItem(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(200, GroupSchema)
-    @blp.doc(summary="Get group", description="Retrieve a group by its id.")
+    @blp.doc(summary="Get group", description="Retrieve a group by its id.", tags=["Groups"])
     def get(self, group_id: int):
         """Get a single group by id."""
         group = Group.query.get(group_id)
@@ -77,7 +77,7 @@ class GroupItem(MethodView):
     # PUBLIC_INTERFACE
     @blp.arguments(GroupUpdateSchema)
     @blp.response(200, GroupSchema)
-    @blp.doc(summary="Update group", description="Update the group's attributes.")
+    @blp.doc(summary="Update group", description="Update the group's attributes.", tags=["Groups"])
     def patch(self, update_data, group_id: int):
         """Update a group's attributes."""
         group = Group.query.get(group_id)
@@ -92,7 +92,7 @@ class GroupItem(MethodView):
 
     # PUBLIC_INTERFACE
     @blp.response(204)
-    @blp.doc(summary="Delete group", description="Delete a group and its related data.")
+    @blp.doc(summary="Delete group", description="Delete a group and its related data.", tags=["Groups"])
     def delete(self, group_id: int):
         """Delete a group by id."""
         group = Group.query.get(group_id)
